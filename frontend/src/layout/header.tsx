@@ -1,8 +1,4 @@
-import React from 'react';
-import {
-  NavLink,
-  type NavLinkRenderProps,
-} from 'react-router'; // ✅ use react-router-dom
+import { Link } from '@tanstack/react-router';
 import { Album, HouseHeart } from 'lucide-react';
 
 const LINKS = [
@@ -19,21 +15,20 @@ function Header() {
     >
       <div className="flex justify-center items-center gap-6 w-11/12">
         {LINKS.map(({ to, icon: Icon, label }) => (
-          <NavLink
+          <Link
             key={to}
             to={to}
-            className={({ isActive }: NavLinkRenderProps) =>
-              `rounded-lg p-2 flex items-center justify-center transition-all duration-200
-               ${
-                 isActive
-                   ? 'bg-sky-500 text-white'
-                   : 'border text-sky-400 '
-               }`
-            }
+            className="rounded-lg p-2 flex items-center justify-center transition-all duration-200"
+            activeProps={{
+              className: 'bg-sky-500 text-white',
+            }}
+            inactiveProps={{
+              className: 'border text-sky-400',
+            }}
           >
             <span className="sr-only">{label}</span>
             <Icon className="w-6 h-6" />
-          </NavLink>
+          </Link>
         ))}
       </div>
     </div>
